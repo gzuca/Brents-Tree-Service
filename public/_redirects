@@ -1,0 +1,35 @@
+# ── URLs viejas de Hibu → nuevas páginas ──────────────────────
+
+# Areas of service
+/areas-of-service/pflugerville-tx-tree-services/    /locations/pflugerville    301
+/areas-of-service/georgetown-tree-service/          /locations/georgetown      301
+/areas-of-service/tree-service-leander/             /locations/leander         301
+/areas-of-service/tree-service-round-rock/          /locations/round-rock      301
+/areas-of-service/cedar-park-tree-service/          /locations/cedar-park      301
+/areas-of-service/*                                 /locations                 301
+
+# Services
+/tree-services/tree-services/                       /services                  301
+/other-services/ball-moss-removal/                  /services/property-cleanup 301
+/other-services/mistletoe-removal/                  /services/property-cleanup 301
+/other-services/ball-moss-removal/contact/          /                          301
+/other-services/*                                   /services/property-cleanup 301
+/tree-trimming-services/                            /services/tree-trimming    301
+/tree-health/                                       /services/tree-health      301
+/about-us/                                          /             301
+/brush-removal/                                     /services/property-cleanup    301
+/tree-insects/                                      /tree-info/insects            301
+/contact-us/                                        /             301
+
+# Tree info
+/tree-info/                                         /tree-info/disease         301
+/choosing-the-right-fast-growing-shade-trees-for-central-texas-yards/    /tree-info/types    301
+/common-live-christmas-tree-types-and-their-advantages/                  /tree-info/types    301
+
+# WordPress leftovers
+/wp-content/uploads/sites/1237/*                    /                          301
+/wp-content/*                                       /                          301
+
+# React Router — must be last
+/thank-you                                          /index.html                200
+/*                                                  /index.html                200

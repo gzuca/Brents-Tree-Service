@@ -1,0 +1,88 @@
+/* ===================================
+   LOCATION PAGES
+=================================== */
+
+/* Info cards row */
+.location-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 48px;
+}
+.loc-info-card {
+  background: var(--gray-light);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  text-align: center;
+}
+.loc-info-card .li-icon { font-size: 28px; margin-bottom: 8px; }
+.loc-info-card strong   { display: block; font-family: var(--font-display); font-size: 18px; font-weight: 700; margin-bottom: 4px; color: var(--black); }
+.loc-info-card span     { font-size: 13px; color: var(--gray); }
+
+/* Services grid inside location page */
+.loc-services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+
+.loc-service-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  transition: all .2s ease;
+}
+.loc-service-item:hover { border-color: var(--red); box-shadow: var(--shadow-md); }
+.loc-service-icon { font-size: 24px; flex-shrink: 0; }
+.loc-service-item h4 { font-family: var(--font-display); font-size: 16px; font-weight: 700; margin-bottom: 4px; color: var(--black); }
+.loc-service-item p  { font-size: 13px; color: var(--gray); line-height: 1.5; }
+
+/* Body layout */
+.loc-body {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 48px;
+  align-items: start;
+}
+.loc-sticky { display: flex; flex-direction: column; gap: 16px; position: sticky; top: 88px; }
+.loc-body-text p { font-size: 16px; color: var(--gray-dark); line-height: 1.75; margin-bottom: 14px; }
+
+/* ===================================
+   CITIES INDEX GRID
+=================================== */
+.cities-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+.city-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  transition: all .2s ease;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.city-card:hover { border-color: var(--red); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.city-card h3      { font-family: var(--font-display); font-size: 17px; font-weight: 700; margin-bottom: 4px; color: var(--black); }
+.city-card .city-county { font-size: 12px; color: var(--gray); margin-bottom: 8px; }
+.city-card .city-dist   { font-size: 12px; color: var(--gray); margin-bottom: 8px; }
+.city-card .city-tags   { display: flex; flex-wrap: wrap; gap: 4px; }
+.city-card .city-tag    { background: var(--gray-light); color: var(--gray-dark); font-size: 11px; padding: 2px 7px; border-radius: 20px; font-weight: 500; }
+.city-card .city-link   { font-size: 12px; font-weight: 700; color: var(--red); margin-top: 10px; display: block; }
+
+/* ===================================
+   RESPONSIVE
+=================================== */
+@media (max-width: 1024px) {
+  .cities-grid { grid-template-columns: repeat(3, 1fr); }
+  .loc-body    { grid-template-columns: 1fr; gap: 32px; }
+  .loc-sticky  { position: static; }
+}
+@media (max-width: 768px) {
+  .cities-grid          { grid-template-columns: repeat(2, 1fr); }
+  .location-info-grid   { grid-template-columns: 1fr; }
+  .loc-services-grid    { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .cities-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,54 @@
+/* ===================================
+   SERVICE DETAIL PAGE
+=================================== */
+.svc-page-body {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ── Main content ── */
+.svc-body-text p {
+  font-size: 16px;
+  color: var(--gray-dark);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.svc-subs { margin-top: 36px; display: flex; flex-direction: column; gap: 20px; }
+.svc-sub  { background: var(--gray-light); border-radius: var(--radius-lg); padding: 24px; }
+.svc-sub h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 10px; color: var(--black); }
+.svc-sub p  { font-size: 15px; color: var(--gray-dark); line-height: 1.7; }
+
+/* Photo grid */
+.svc-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 36px; }
+.svc-photos img {
+  border-radius: var(--radius);
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  transition: transform .3s ease;
+}
+.svc-photos img:first-child { grid-column: span 2; height: 260px; }
+.svc-photos img:hover { transform: scale(1.02); }
+
+/* ── Sidebar ── */
+.svc-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: sticky;
+  top: 88px;
+}
+
+/* ===================================
+   RESPONSIVE
+=================================== */
+@media (max-width: 1024px) {
+  .svc-page-body { grid-template-columns: 1fr; gap: 32px; }
+  .svc-sidebar   { position: static; }
+}
+@media (max-width: 768px) {
+  .svc-photos img:first-child { height: 200px; }
+}

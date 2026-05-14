@@ -1,0 +1,133 @@
+/* ===================================
+   TESTIMONIALS CAROUSEL
+=================================== */
+.testimonials-section {
+  background: white;
+}
+
+.testimonials-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* ── Grid ── */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.testimonials-grid.fading  { opacity: 0; transform: translateY(8px); }
+.testimonials-grid.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Card ── */
+.testimonial-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+}
+
+.testimonial-quote {
+  color: var(--red);
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 0.8;
+  margin-bottom: 12px;
+  opacity: 0.35;
+}
+
+.testimonial-text {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.75;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+.testimonial-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.testimonial-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.testimonial-location {
+  font-size: 11px;
+  color: var(--gray);
+  margin-top: 2px;
+}
+
+.testimonial-stars {
+  color: #f5a623;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+/* ── Controls ── */
+.testimonials-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.testimonials-arrow {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+  color: var(--gray-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--tr);
+  line-height: 1;
+}
+.testimonials-arrow:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: white;
+}
+
+.testimonials-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.testimonials-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: all var(--tr);
+}
+.testimonials-dot.active {
+  background: var(--red);
+  width: 20px;
+  border-radius: 4px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}

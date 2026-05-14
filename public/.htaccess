@@ -1,0 +1,62 @@
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # ── Old Hibu Redirects ────────────────────────────────────
+
+  # Areas of service
+  RewriteRule ^areas-of-service/pflugerville-tx-tree-services/?$ /locations/pflugerville [R=301,L]
+  RewriteRule ^areas-of-service/georgetown-tree-service/?$ /locations/georgetown [R=301,L]
+  RewriteRule ^areas-of-service/tree-service-leander/?$ /locations/leander [R=301,L]
+  RewriteRule ^areas-of-service/tree-service-round-rock/?$ /locations/round-rock [R=301,L]
+  RewriteRule ^areas-of-service/cedar-park-tree-service/?$ /locations/cedar-park [R=301,L]
+  RewriteRule ^areas-of-service/(.*)$ /locations [R=301,L]
+
+  # Services
+  RewriteRule ^tree-services/tree-services/?$ /services [R=301,L]
+  RewriteRule ^other-services/ball-moss-removal/contact/?$ / [R=301,L]
+  RewriteRule ^other-services/ball-moss-removal/?$ /services/property-cleanup [R=301,L]
+  RewriteRule ^other-services/mistletoe-removal/?$ /services/property-cleanup [R=301,L]
+  RewriteRule ^other-services/(.*)$ /services/property-cleanup [R=301,L]
+  RewriteRule ^tree-trimming-services/?$ /services/tree-trimming [R=301,L]
+  RewriteRule ^tree-health/?$ /services/tree-health [R=301,L]
+  RewriteRule ^about-us/?$ / [R=301,L]
+  RewriteRule ^brush-removal/?$ /services/property-cleanup [R=301,L]
+  RewriteRule ^tree-insects/?$ /tree-info/insects [R=301,L]
+  RewriteRule ^contact-us/?$ / [R=301,L]
+
+  # Tree info
+  RewriteRule ^tree-info/?$ /tree-info/disease [R=301,L]
+  RewriteRule ^choosing-the-right-fast-growing-shade-trees-for-central-texas-yards/?$ /tree-info/types [R=301,L]
+  RewriteRule ^common-live-christmas-tree-types-and-their-advantages/?$ /tree-info/types [R=301,L]
+
+  # WordPress leftovers
+  RewriteRule ^wp-content/uploads/sites/1237/(.*)$ / [R=301,L]
+  RewriteRule ^wp-content/(.*)$ / [R=301,L]
+
+  # Hibu old blog posts
+  RewriteRule ^what-is-ball-moss-and-should-it-be-removed/?$ /blog/what-is-ball-moss-and-should-it-be-removed [R=301,L]
+
+  # ── Cities outside service area → /locations ──────────────
+  RewriteRule ^locations/kyle/?$ /locations [R=301,L]
+  RewriteRule ^locations/buda/?$ /locations [R=301,L]
+  RewriteRule ^locations/lockhart/?$ /locations [R=301,L]
+  RewriteRule ^locations/wimberley/?$ /locations [R=301,L]
+  RewriteRule ^locations/dripping-springs/?$ /locations [R=301,L]
+  RewriteRule ^locations/bastrop/?$ /locations [R=301,L]
+  RewriteRule ^locations/san-marcos/?$ /locations [R=301,L]
+
+  # ── React Router — must go last ───────────────────────────
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+
+</IfModule>
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# This domain inherits the "PHP" package.
+# php -- END cPanel-generated handler, do not edit
