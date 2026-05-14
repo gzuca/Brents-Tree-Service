@@ -6,7 +6,6 @@ import { LIVE_REVIEWS } from '../data/reviewsLive';
 /* ── Constants ── */
 const PHONE      = '(512) 310-8789';
 const MAPS_URL = 'https://www.google.com/maps/search/Brent%27s+Tree+Service+Austin+TX';
-const STATIC_REV = { rating: 4.7, total: 300 };
 
 const SERVICES_LIST = [
   'Tree Trimming & Branch Services',
@@ -23,7 +22,7 @@ const SERVICES_LIST = [
 
 const TRUST_ITEMS = [
   '30+ Years of Experience',
-  'Licensed & Fully Insured (TX 3508-A)',
+  'Fully Insured',
   'Free Quotes',
   'Financing Available',
   '24/7 Emergency Services',
