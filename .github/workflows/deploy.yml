@@ -1,0 +1,52 @@
+name: Deploy Brents Tree Service
+
+on:
+  # Corre automáticamente cada lunes a las 6am CST (12pm UTC)
+  schedule:
+    - cron: '0 12 * * 1'
+
+  # También puedes correrlo manualmente desde GitHub
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Descarga el código del repositorio
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Configura Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 3. Instala dependencias
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Crea el .env con los secrets de GitHub
+      - name: Create .env file
+        run: |
+          echo "VITE_SERPAPI_KEY=${{ secrets.SERPAPI_KEY }}" >> .env
+          echo "VITE_EMAILJS_SERVICE_ID=${{ secrets.EMAILJS_SERVICE_ID }}" >> .env
+          echo "VITE_EMAILJS_TEMPLATE_ID=${{ secrets.EMAILJS_TEMPLATE_ID }}" >> .env
+          echo "VITE_EMAILJS_PUBLIC_KEY=${{ secrets.EMAILJS_PUBLIC_KEY }}" >> .env
+
+      # 5. Corre el script de reviews + build
+      - name: Build site
+        run: npm run build
+
+      # 6. Sube dist/ a HostGator por FTP
+      - name: Deploy to HostGator via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ${{ secrets.FTP_PATH }}/
+          dangerous-clean-slate: false
