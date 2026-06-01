@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import '../styles/Hero.css';
 import '../styles/Pages.css';
@@ -290,6 +290,13 @@ function NotFound() {
 }
 
 function ThankYouPage() {
+
+  useEffect(() => {
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Lead');
+  }
+}, []);
+
   return (
     <>
       <Helmet>

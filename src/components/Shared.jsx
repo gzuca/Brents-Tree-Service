@@ -85,7 +85,7 @@ function DiscountBanner() {
         <p>Mention this offer when scheduling. Not valid with other offers. Restrictions apply.</p>
         <div className="discount-call">
           <span className="discount-call-label">Call to Schedule:</span>
-          <a href="tel:5123108789">(512) 310-8789</a>
+          <a href="tel:5123108789" onClick={() => { if (typeof fbq !== 'undefined') fbq('track', 'Contact'); }}>(512) 310-8789</a>
         </div>
       </div>
     </section>
@@ -100,7 +100,7 @@ function TrustSidebar({ heading = 'Ready to Get Started?' }) {
     <div className="sidebar-card red-card">
       <h4>{heading}</h4>
       <p style={{ marginBottom: 16 }}>Call or text us anytime:</p>
-      <a href="tel:5123108789" className="sidebar-phone">📞 {PHONE}</a>
+      <a href="tel:5123108789" className="sidebar-phone" onClick={() => { if (typeof fbq !== 'undefined') fbq('track', 'Contact'); }}>📞 {PHONE}</a>
       <div className="sidebar-trust">
         {TRUST_ITEMS.map(item => (
           <div className="trust-row" key={item}>
