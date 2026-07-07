@@ -4,13 +4,14 @@ import '../../styles/ServicePage.css';
 import '../../styles/Shared.css';
 import { getServiceBySlug, SERVICES } from '../../data/services';
 import { QuoteForm, TrustSidebar, DiscountBanner } from '../../components/Shared';
+import { NotFound } from '../OtherPages';
 import { Helmet } from 'react-helmet-async';
 
 function ServicePage() {
   const { slug } = useParams();
   const svc = getServiceBySlug(slug);
 
-  if (!svc) return <Navigate to="/" replace />;
+  if (!svc) return <NotFound />;
 
   return (
     <>
@@ -98,7 +99,7 @@ function ServicePage() {
                 <p>
                   We provide {svc.title.toLowerCase()} throughout:<br />
                   Austin · Georgetown · Round Rock · Cedar Park · Pflugerville ·
-                  Kyle · Buda · Leander · and all surrounding areas.
+                  Leander · Hutto · Liberty Hill · and all surrounding areas.
                 </p>
               </div>
             </div>

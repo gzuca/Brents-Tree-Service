@@ -40,6 +40,17 @@ DirectoryIndex index.html
   # Hibu old blog posts
   RewriteRule ^what-is-ball-moss-and-should-it-be-removed/?$ /blog/what-is-ball-moss-and-should-it-be-removed [R=301,L]
 
+  # ── Legacy WordPress URL redirects (added 2026-07-07) ─────
+  RewriteRule ^tree-types/?$ /tree-info/types [R=301,L]
+  RewriteRule ^tree-removal/?$ /services/tree-removal [R=301,L]
+  RewriteRule ^tree-pruning-services/?$ /services/tree-pruning [R=301,L]
+  RewriteRule ^ball-moss-removal/?$ /services/property-cleanup [R=301,L]
+  RewriteRule ^storm-cleanup-services/?$ /services/emergency-storm [R=301,L]
+  RewriteRule ^is-my-tree-dead-or-dormant-a-simple-winter-checklist-for-central-texas-trees/?$ /blog/is-my-tree-dead-or-dormant-a-simple-winter-checklist-for-central-texas-trees [R=301,L]
+  RewriteRule ^emergency-tree-services-what-to-do-when-a-tree-falls/?$ /blog/emergency-tree-services-what-to-do-when-a-tree-falls [R=301,L]
+  RewriteRule ^why-regular-tree-pruning-is-essential-for-tree-health/?$ /blog/why-regular-tree-pruning-is-essential-for-tree-health [R=301,L]
+  RewriteRule ^careers/$ /careers [R=301,L]
+
   # ── Cities outside service area → /locations ──────────────
   RewriteRule ^locations/kyle/?$ /locations [R=301,L]
   RewriteRule ^locations/buda/?$ /locations [R=301,L]
@@ -48,6 +59,12 @@ DirectoryIndex index.html
   RewriteRule ^locations/dripping-springs/?$ /locations [R=301,L]
   RewriteRule ^locations/bastrop/?$ /locations [R=301,L]
   RewriteRule ^locations/san-marcos/?$ /locations [R=301,L]
+
+  # ── Normalize trailing slashes (redirect to no-slash version) ──
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !^/$
+  RewriteCond %{REQUEST_URI} (.+)/$
+  RewriteRule ^ %1 [R=301,L]
 
   # ── React Router — must go last ───────────────────────────
   RewriteRule ^index\.html$ - [L]

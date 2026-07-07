@@ -5,13 +5,14 @@ import '../../styles/Shared.css';
 import { getCityBySlug, CITIES } from '../../data/cities';
 import { SERVICES } from '../../data/services';
 import { QuoteForm, TrustSidebar, DiscountBanner } from '../../components/Shared';
+import { NotFound } from '../OtherPages';
 import { Helmet } from 'react-helmet-async';
 
 function LocationPage() {
   const { citySlug } = useParams();
   const city = getCityBySlug(citySlug);
 
-  if (!city) return <Navigate to="/locations" replace />;
+  if (!city) return <NotFound />;
 
   return (
     <>

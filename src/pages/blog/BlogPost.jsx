@@ -3,12 +3,13 @@ import { Helmet } from 'react-helmet-async';
 import '../../styles/Hero.css';
 import '../../styles/BlogPage.css';
 import { getBlogBySlug, BLOGS } from '../../data/blogData';
+import { NotFound } from '../OtherPages';
 
 function BlogPost() {
   const { slug } = useParams();
   const blog = getBlogBySlug(slug);
 
-  if (!blog) return <Navigate to="/blog" replace />;
+  if (!blog) return <NotFound />;
 
   const related = BLOGS
     .filter(b => b.slug !== slug && b.category === blog.category)

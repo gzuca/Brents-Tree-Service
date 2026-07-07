@@ -273,19 +273,26 @@ function TreeInfoPage() {
 ───────────────────────────────────────────── */
 function NotFound() {
   return (
-    <section className="section" style={{ textAlign: 'center', minHeight: '60vh', display: 'flex', alignItems: 'center' }}>
-      <div className="container">
-        <div style={{ fontSize: 64, marginBottom: 16 }}>🌳</div>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 48, fontWeight: 800, marginBottom: 12 }}>404</h1>
-        <p style={{ fontSize: 18, color: 'var(--gray)', marginBottom: 28 }}>
-          Oops! This page seems to have been trimmed away.
-        </p>
-        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link to="/" className="btn btn-red">← Back Home</Link>
-          <a href="tel:5123108789" className="btn btn-outline">📞 (512) 310-8789</a>
+    <>
+      <Helmet>
+        <title>Page Not Found | Brents Tree Service</title>
+        <meta name="robots" content="noindex, follow" />
+      </Helmet>
+
+      <section className="section" style={{ textAlign: 'center', minHeight: '60vh', display: 'flex', alignItems: 'center' }}>
+        <div className="container">
+          <div style={{ fontSize: 64, marginBottom: 16 }}>🌳</div>
+          <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 48, fontWeight: 800, marginBottom: 12 }}>404</h1>
+          <p style={{ fontSize: 18, color: 'var(--gray)', marginBottom: 28 }}>
+            Oops! This page seems to have been trimmed away.
+          </p>
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link to="/" className="btn btn-red">← Back Home</Link>
+            <a href="tel:5123108789" className="btn btn-outline">📞 (512) 310-8789</a>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
