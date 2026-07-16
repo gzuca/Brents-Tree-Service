@@ -7,6 +7,7 @@
   "prebuild": "node update-reviews.js",
   "dev": "vite",
   "build": "vite build",
+  "postbuild": "node scripts/prerender.js",
   "preview": "vite preview"
 },
   "dependencies": {
@@ -19,6 +20,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",
+    "puppeteer": "^25.3.0",
+    "serve-handler": "^6.1.7",
     "vite": "^5.1.0"
   }
 }

@@ -38,6 +38,10 @@ jobs:
           echo "VITE_EMAILJS_TEMPLATE_ID=${{ secrets.EMAILJS_TEMPLATE_ID }}" >> .env
           echo "VITE_EMAILJS_PUBLIC_KEY=${{ secrets.EMAILJS_PUBLIC_KEY }}" >> .env
 
+      #4.5 Instala las librerias de sistema que puppeteer y chrome necesitan
+      - name: Install Chrome dependencies for Puppeteer
+        run: npx puppeteer browsers install chrome
+
       # 5. Corre el script de reviews + build
       - name: Build site
         run: npm run build
