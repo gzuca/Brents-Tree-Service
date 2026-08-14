@@ -183,7 +183,10 @@ function QuoteForm({ compact = false, showTitle=true }) {
 
     try {
       const ejs = await import('@emailjs/browser');
-      await ejs.send(sId, tId, { ...form, reply_to: form.email }, pKey);
+      const displaySource = (form.leadSource === 'Other' && form.otherSource.trim())
+        ? `Other – ${form.otherSource.trim()}`
+        : form.leadSource;
+      await ejs.send(sId, tId, { ...form, leadSource: displaySource, reply_to: form.email }, pKey);
       setForm({ name: '', phone: '', email: '', service: '', address: '', message: '', leadSource: '', otherSource: '' });
       navigate('/thank-you');
     } catch {
