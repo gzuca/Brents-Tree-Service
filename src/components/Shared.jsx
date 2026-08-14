@@ -15,10 +15,11 @@ const SERVICES_LIST = [
   'Property & Cleanup Services',
   'Lot Clearing',
   'Tree Pruning',
-  'Tree Health & Arborist Services',
   'Commercial Tree Services',
   'Other / Not Sure',
 ];
+
+const LEAD_SOURCES = ['Google', 'Facebook', 'Instagram', 'Already Knew Us', 'Other'];
 
 const TRUST_ITEMS = [
   '30+ Years of Experience',
@@ -117,15 +118,55 @@ function TrustSidebar({ heading = 'Ready to Get Started?' }) {
    QUOTE FORM
 ───────────────────────────────────────────── */
 function QuoteForm({ compact = false, showTitle=true }) {
-  const [form,   setForm]   = useState({ name: '', phone: '', email: '', service: '',address:'', message: '' });
+  const [form,   setForm]   = useState({ name: '', phone: '', email: '', service: '', address: '', message: '', leadSource: '', otherSource: '' });
   const [status, setStatus] = useState('idle'); // idle | sending | success | error
   const [errMsg, setErrMsg] = useState('');
   const navigate = useNavigate();
 
+  /* Format phone as the user types: (512) 555-1234. Also strips any non-digit,
+     so pasted junk like a last name can't end up in this field. */
+  const formatPhone = (raw) => {
+    const digits = raw.replace(/\D/g, '').slice(0, 10);
+    const len = digits.length;
+    if (len === 0) return '';
+    if (len < 4) return `(${digits}`;
+    if (len < 7) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  };
+
+  const handlePhoneChange = (e) => {
+    setForm({ ...form, phone: formatPhone(e.target.value) });
+  };
+
+  /* Client-side validation. Returns an error string, or '' if the form is good. */
+  const validate = () => {
+    const phoneDigits = form.phone.replace(/\D/g, '');
+    if (phoneDigits.length !== 10) {
+      return 'Please enter a valid 10-digit phone number.';
+    }
+    if (!form.address.trim()) {
+      return 'Please enter your property address.';
+    }
+    if (!form.leadSource) {
+      return 'Please let us know how you found us.';
+    }
+    if (!compact && form.message.trim().length < 10) {
+      return 'Please add a short description of what you need.';
+    }
+    return '';
+  };
 
   /* Submit */
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const validationError = validate();
+    if (validationError) {
+      setStatus('error');
+      setErrMsg(validationError);
+      return;
+    }
+
     setStatus('sending');
 
     const sId  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
@@ -143,7 +184,7 @@ function QuoteForm({ compact = false, showTitle=true }) {
     try {
       const ejs = await import('@emailjs/browser');
       await ejs.send(sId, tId, { ...form, reply_to: form.email }, pKey);
-      setForm({ name: '', phone: '', email: '', service: '', message: '' });
+      setForm({ name: '', phone: '', email: '', service: '', address: '', message: '', leadSource: '', otherSource: '' });
       navigate('/thank-you');
     } catch {
       setStatus('error');
@@ -176,8 +217,8 @@ function QuoteForm({ compact = false, showTitle=true }) {
         </div>
         <div className="form-group">
           <label htmlFor='phone'>Phone Number *</label>
-          <input id='phone' type="tel" placeholder="Your phone number"
-            value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} required />
+          <input id='phone' type="tel" placeholder="(512) 555-1234" inputMode="numeric"
+            value={form.phone} onChange={handlePhoneChange} maxLength={14} required />
         </div>
         <div className="form-group">
           <label htmlFor='email'>Email Address *</label>
@@ -194,17 +235,43 @@ function QuoteForm({ compact = false, showTitle=true }) {
       </div>
 
       <div className="form-group">
-          <label htmlFor='address'>Address</label>
+          <label htmlFor='address'>Address *</label>
           <input id='address' type="text" placeholder="Your property address"
-            value={form.address} onChange={e => setForm({ ...form, address: e.target.value })} />
+            value={form.address} onChange={e => setForm({ ...form, address: e.target.value })} required />
         </div>
+
+      {/* How did you hear about us */}
+      <div className="form-group">
+        <label>How did you find us? *</label>
+        <div className="lead-source-row">
+          {LEAD_SOURCES.map(src => (
+            <button
+              key={src}
+              type="button"
+              className={`lead-source-btn${form.leadSource === src ? ' selected' : ''}`}
+              onClick={() => setForm({ ...form, leadSource: src, otherSource: src === 'Other' ? form.otherSource : '' })}
+            >
+              {src}
+            </button>
+          ))}
+        </div>
+        {form.leadSource === 'Other' && (
+          <input
+            type="text"
+            placeholder="Tell us where! (optional)"
+            value={form.otherSource}
+            onChange={e => setForm({ ...form, otherSource: e.target.value })}
+            style={{ marginTop: 8 }}
+          />
+        )}
+      </div>
 
       {/* Message (not shown in compact mode) */}
       {!compact && (
         <div className="form-group">
           <label htmlFor='message'>Message</label>
           <textarea id='message' placeholder="Describe your situation or ask a question..."
-            value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} rows={4} />
+            value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} rows={4} required />
         </div>
       )}
 
