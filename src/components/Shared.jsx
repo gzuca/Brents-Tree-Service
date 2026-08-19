@@ -19,7 +19,7 @@ const SERVICES_LIST = [
   'Other / Not Sure',
 ];
 
-const LEAD_SOURCES = ['Google', 'Facebook', 'Instagram', 'Already Knew Us', 'Other'];
+const LEAD_SOURCES = ['Google', 'Facebook', 'Instagram', 'Other'];
 
 const TRUST_ITEMS = [
   '30+ Years of Experience',
